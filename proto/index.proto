@@ -1,0 +1,56 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package indexPackage;
+
+service ChatService {
+    rpc ChatInitiate(InitiateRequest) returns (InitiateResponse){}
+    rpc SendMessage(MessageRequest) returns (stream google.protobuf.Empty){}
+    rpc ChatStream(StreamRequset) returns (stream StreamMessage){}
+    rpc UserStream(StreamRequset) returns (stream UserStreamResponse){}
+}
+
+message InitiateRequest {
+    string name = 1;
+    string avata_url =2;
+}
+
+message InitiateResponse {
+    int32 id =1;
+}
+
+message MessageRequest {
+    int32 id =1;
+    string message =2;
+}
+
+message StreamRequset {
+    int32 id = 1;
+}
+
+enum Status {
+    UKNOW =0;
+    ONLINE =1;
+    OFFLINE =2;
+
+}
+
+
+
+message User {
+    int32 id = 1;
+    string name =2;
+    string status = 3;
+    string avatar_urt =4; 
+
+}
+
+message UserStreamResponse{
+    repeated User user = 1;
+}
+
+message StreamMessage {
+    int32 id = 1
+    ;string message = 2;
+
+}
