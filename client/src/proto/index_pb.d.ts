@@ -90,8 +90,8 @@ export class User extends jspb.Message {
   getName(): string;
   setName(value: string): User;
 
-  getStatus(): string;
-  setStatus(value: string): User;
+  getStatus(): Status;
+  setStatus(value: Status): User;
 
   getAvatarUrt(): string;
   setAvatarUrt(value: string): User;
@@ -108,7 +108,7 @@ export namespace User {
   export type AsObject = {
     id: number,
     name: string,
-    status: string,
+    status: Status,
     avatarUrt: string,
   }
 }

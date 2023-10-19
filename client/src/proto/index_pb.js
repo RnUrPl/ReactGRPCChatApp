@@ -792,7 +792,7 @@ proto.indexPackage.User.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    status: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    status: jspb.Message.getFieldWithDefault(msg, 3, 0),
     avatarUrt: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -839,7 +839,7 @@ proto.indexPackage.User.deserializeBinaryFromReader = function(msg, reader) {
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!proto.indexPackage.Status} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     case 4:
@@ -890,8 +890,8 @@ proto.indexPackage.User.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getStatus();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeEnum(
       3,
       f
     );
@@ -943,20 +943,20 @@ proto.indexPackage.User.prototype.setName = function(value) {
 
 
 /**
- * optional string status = 3;
- * @return {string}
+ * optional Status status = 3;
+ * @return {!proto.indexPackage.Status}
  */
 proto.indexPackage.User.prototype.getStatus = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {!proto.indexPackage.Status} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.indexPackage.Status} value
  * @return {!proto.indexPackage.User} returns this
  */
 proto.indexPackage.User.prototype.setStatus = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 

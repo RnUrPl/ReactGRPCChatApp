@@ -1,0 +1,12 @@
+*2
+$6
+SELECT
+$1
+0
+*3
+$5
+rpush
+$5
+users
+$58
+{"id":9885,"status":1,"name":"plrn4pf","avatarUrt":"dada"}
