@@ -5,7 +5,7 @@ package indexPackage;
 
 service ChatService {
     rpc ChatInitiate(InitiateRequest) returns (InitiateResponse){}
-    rpc SendMessage(MessageRequest) returns (stream google.protobuf.Empty){}
+    rpc SendMessage(MessageRequest) returns ( google.protobuf.Empty){}
     rpc ChatStream(StreamRequset) returns (stream StreamMessage){}
     rpc UserStream(StreamRequset) returns (stream UserStreamResponse){}
 }
@@ -50,7 +50,8 @@ message UserStreamResponse{
 }
 
 message StreamMessage {
-    int32 id = 1
-    ;string message = 2;
+    int32 user_id = 1;
+    string user_avatar =2;
+    string message = 3;
 
 }

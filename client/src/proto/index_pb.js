@@ -1170,8 +1170,9 @@ proto.indexPackage.StreamMessage.prototype.toObject = function(opt_includeInstan
  */
 proto.indexPackage.StreamMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    userId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    userAvatar: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -1210,9 +1211,13 @@ proto.indexPackage.StreamMessage.deserializeBinaryFromReader = function(msg, rea
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.setId(value);
+      msg.setUserId(value);
       break;
     case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUserAvatar(value);
+      break;
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -1245,17 +1250,24 @@ proto.indexPackage.StreamMessage.prototype.serializeBinary = function() {
  */
 proto.indexPackage.StreamMessage.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
+  f = message.getUserId();
   if (f !== 0) {
     writer.writeInt32(
       1,
       f
     );
   }
-  f = message.getMessage();
+  f = message.getUserAvatar();
   if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -1263,10 +1275,10 @@ proto.indexPackage.StreamMessage.serializeBinaryToWriter = function(message, wri
 
 
 /**
- * optional int32 id = 1;
+ * optional int32 user_id = 1;
  * @return {number}
  */
-proto.indexPackage.StreamMessage.prototype.getId = function() {
+proto.indexPackage.StreamMessage.prototype.getUserId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1275,16 +1287,16 @@ proto.indexPackage.StreamMessage.prototype.getId = function() {
  * @param {number} value
  * @return {!proto.indexPackage.StreamMessage} returns this
  */
-proto.indexPackage.StreamMessage.prototype.setId = function(value) {
+proto.indexPackage.StreamMessage.prototype.setUserId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional string message = 2;
+ * optional string user_avatar = 2;
  * @return {string}
  */
-proto.indexPackage.StreamMessage.prototype.getMessage = function() {
+proto.indexPackage.StreamMessage.prototype.getUserAvatar = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1293,8 +1305,26 @@ proto.indexPackage.StreamMessage.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.indexPackage.StreamMessage} returns this
  */
-proto.indexPackage.StreamMessage.prototype.setMessage = function(value) {
+proto.indexPackage.StreamMessage.prototype.setUserAvatar = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string message = 3;
+ * @return {string}
+ */
+proto.indexPackage.StreamMessage.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.indexPackage.StreamMessage} returns this
+ */
+proto.indexPackage.StreamMessage.prototype.setMessage = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

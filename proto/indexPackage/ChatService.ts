@@ -25,10 +25,14 @@ export interface ChatServiceClient extends grpc.Client {
   chatStream(argument: _indexPackage_StreamRequset, metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientReadableStream<_indexPackage_StreamMessage__Output>;
   chatStream(argument: _indexPackage_StreamRequset, options?: grpc.CallOptions): grpc.ClientReadableStream<_indexPackage_StreamMessage__Output>;
   
-  SendMessage(argument: _indexPackage_MessageRequest, metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientReadableStream<_google_protobuf_Empty__Output>;
-  SendMessage(argument: _indexPackage_MessageRequest, options?: grpc.CallOptions): grpc.ClientReadableStream<_google_protobuf_Empty__Output>;
-  sendMessage(argument: _indexPackage_MessageRequest, metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientReadableStream<_google_protobuf_Empty__Output>;
-  sendMessage(argument: _indexPackage_MessageRequest, options?: grpc.CallOptions): grpc.ClientReadableStream<_google_protobuf_Empty__Output>;
+  SendMessage(argument: _indexPackage_MessageRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
+  SendMessage(argument: _indexPackage_MessageRequest, metadata: grpc.Metadata, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
+  SendMessage(argument: _indexPackage_MessageRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
+  SendMessage(argument: _indexPackage_MessageRequest, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
+  sendMessage(argument: _indexPackage_MessageRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
+  sendMessage(argument: _indexPackage_MessageRequest, metadata: grpc.Metadata, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
+  sendMessage(argument: _indexPackage_MessageRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
+  sendMessage(argument: _indexPackage_MessageRequest, callback: grpc.requestCallback<_google_protobuf_Empty__Output>): grpc.ClientUnaryCall;
   
   UserStream(argument: _indexPackage_StreamRequset, metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientReadableStream<_indexPackage_UserStreamResponse__Output>;
   UserStream(argument: _indexPackage_StreamRequset, options?: grpc.CallOptions): grpc.ClientReadableStream<_indexPackage_UserStreamResponse__Output>;
@@ -42,7 +46,7 @@ export interface ChatServiceHandlers extends grpc.UntypedServiceImplementation {
   
   ChatStream: grpc.handleServerStreamingCall<_indexPackage_StreamRequset__Output, _indexPackage_StreamMessage>;
   
-  SendMessage: grpc.handleServerStreamingCall<_indexPackage_MessageRequest__Output, _google_protobuf_Empty>;
+  SendMessage: grpc.handleUnaryCall<_indexPackage_MessageRequest__Output, _google_protobuf_Empty>;
   
   UserStream: grpc.handleServerStreamingCall<_indexPackage_StreamRequset__Output, _indexPackage_UserStreamResponse>;
   

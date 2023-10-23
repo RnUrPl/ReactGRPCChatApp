@@ -134,8 +134,11 @@ export namespace UserStreamResponse {
 }
 
 export class StreamMessage extends jspb.Message {
-  getId(): number;
-  setId(value: number): StreamMessage;
+  getUserId(): number;
+  setUserId(value: number): StreamMessage;
+
+  getUserAvatar(): string;
+  setUserAvatar(value: string): StreamMessage;
 
   getMessage(): string;
   setMessage(value: string): StreamMessage;
@@ -150,7 +153,8 @@ export class StreamMessage extends jspb.Message {
 
 export namespace StreamMessage {
   export type AsObject = {
-    id: number,
+    userId: number,
+    userAvatar: string,
     message: string,
   }
 }

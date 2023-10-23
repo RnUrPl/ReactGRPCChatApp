@@ -85,7 +85,7 @@ export class ChatServiceClient {
 
   methodDescriptorSendMessage = new grpcWeb.MethodDescriptor(
     '/indexPackage.ChatService/SendMessage',
-    grpcWeb.MethodType.SERVER_STREAMING,
+    grpcWeb.MethodType.UNARY,
     proto_index_pb.MessageRequest,
     google_protobuf_empty_pb.Empty,
     (request: proto_index_pb.MessageRequest) => {
@@ -96,13 +96,34 @@ export class ChatServiceClient {
 
   sendMessage(
     request: proto_index_pb.MessageRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<google_protobuf_empty_pb.Empty> {
-    return this.client_.serverStreaming(
-      this.hostname_ +
-        '/indexPackage.ChatService/SendMessage',
-      request,
-      metadata || {},
-      this.methodDescriptorSendMessage);
+    metadata: grpcWeb.Metadata | null): Promise<google_protobuf_empty_pb.Empty>;
+
+  sendMessage(
+    request: proto_index_pb.MessageRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: google_protobuf_empty_pb.Empty) => void): grpcWeb.ClientReadableStream<google_protobuf_empty_pb.Empty>;
+
+  sendMessage(
+    request: proto_index_pb.MessageRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: google_protobuf_empty_pb.Empty) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/indexPackage.ChatService/SendMessage',
+        request,
+        metadata || {},
+        this.methodDescriptorSendMessage,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/indexPackage.ChatService/SendMessage',
+    request,
+    metadata || {},
+    this.methodDescriptorSendMessage);
   }
 
   methodDescriptorChatStream = new grpcWeb.MethodDescriptor(
