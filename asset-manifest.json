@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ReactGRPCChatApp/static/css/main.90cf8a59.css",
+    "main.js": "/ReactGRPCChatApp/static/js/main.4c3c4559.js",
+    "index.html": "/ReactGRPCChatApp/index.html",
+    "main.90cf8a59.css.map": "/ReactGRPCChatApp/static/css/main.90cf8a59.css.map",
+    "main.4c3c4559.js.map": "/ReactGRPCChatApp/static/js/main.4c3c4559.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.90cf8a59.css",
+    "static/js/main.4c3c4559.js"
+  ]
+}
