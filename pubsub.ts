@@ -21,10 +21,10 @@ export const listenMainCahtRoomUpdate = (fn: listenFnCb<StreamMessage>) => {
 }
 
 export const emmitUserUpdate = (user: User) => {
-    nrp.emit(REDIS_CHANNELS.mainRoom, JSON.stringify(user))
+    nrp.emit(REDIS_CHANNELS.userChange, JSON.stringify(user))
 }
 export const listenUserUpdate = (fn: listenFnCb<User>) => {
-    nrp.on(REDIS_CHANNELS.mainRoom, (data, channel) => {
+    nrp.on(REDIS_CHANNELS.userChange, (data, channel) => {
         const msg = JSON.parse(data) as User
         fn(msg, channel)
     })

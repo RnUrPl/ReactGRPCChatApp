@@ -9,7 +9,7 @@ import { Status } from './proto/indexPackage/Status'
 import { StreamMessage } from './proto/indexPackage/StreamMessage'
 import { StreamRequset, StreamRequset__Output } from './proto/indexPackage/StreamRequset'
 import { UserStreamResponse } from './proto/indexPackage/UserStreamResponse'
-import { emitMainRoomChatUpdate, listenMainCahtRoomUpdate, listenUserUpdate } from './pubsub'
+import { emitMainRoomChatUpdate, emmitUserUpdate, listenMainCahtRoomUpdate, listenUserUpdate } from './pubsub'
 
 
 const PORT = 8082
@@ -53,7 +53,7 @@ function getServer() {
 
             listUsers((err, users) => {
                 if (err) return callback(err)
-                const dbUser = users.find(u => u.name?.toLocaleLowerCase() === sessionName)
+                const dbUser = users.find(u => u.name?.toLocaleLowerCase() === sessionName.toLocaleLowerCase())
                 if (dbUser === undefined) {
                     const user: User = {
                         id: Math.floor(Math.random() * 10000),
@@ -64,6 +64,7 @@ function getServer() {
                     }
                     addUser(user, (err) => {
                         if (err) return callback(err)
+                        emmitUserUpdate(user)
                         return callback(null, { id: user.id })
                     })
                     return
@@ -76,11 +77,13 @@ function getServer() {
                     updateUser(dbUser, (err) => {
                         if (err) return callback(err)
 
+                        emmitUserUpdate(dbUser)
                         return callback(null, { id: dbUser?.id })
+                        
                     })
                 }
 
-
+                
             })
 
         },
@@ -93,7 +96,8 @@ function getServer() {
                 const msg: StreamMessage = {
                     userId: user.id,
                     message: message,
-                    userAvatar: user.avatarUrt
+                    userAvatar: user.avatarUrt,
+                    userName: user.name
                 }
 
                 addMessageToRoom(msg, (err) => {
@@ -122,6 +126,7 @@ function getServer() {
                     updateUser(user, (err) => {
                         if (err) console.error(err)
                         callObjByUserName.delete(id)
+                        emmitUserUpdate(user)
                     })
 
                 })
@@ -132,7 +137,7 @@ function getServer() {
         UserStream: (call) => {
             const { id = -1 } = call.request
             if (!id) return call.end()
-            getUser(id, (err, user) => {
+            getUser(id, (err) => {
                 if (err) return call.end()
                 listUsers((err, users) => {
                     if (err) call.end()
@@ -153,15 +158,15 @@ const setupPubSub = () => {
     listenUserUpdate(() => {
         listUsers((err, users) => {
             if (err) return console.log(err)
-            for (const [userId, userCall] of userStreamById) {
+            for (const [, userCall] of userStreamById) {
                 userCall.write({ user: users })
             }
         })
     })
     listenMainCahtRoomUpdate((msg, channel) => {
-        console.log(channel)
-        for (const [userId, userCall] of callObjByUserName) {
-
+        
+        for (const [, userCall] of callObjByUserName) {
+            userCall.write(msg)
         }
     })
 }

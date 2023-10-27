@@ -143,6 +143,9 @@ export class StreamMessage extends jspb.Message {
   getMessage(): string;
   setMessage(value: string): StreamMessage;
 
+  getUserName(): string;
+  setUserName(value: string): StreamMessage;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamMessage.AsObject;
   static toObject(includeInstance: boolean, msg: StreamMessage): StreamMessage.AsObject;
@@ -156,6 +159,7 @@ export namespace StreamMessage {
     userId: number,
     userAvatar: string,
     message: string,
+    userName: string,
   }
 }
 
