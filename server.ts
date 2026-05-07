@@ -12,8 +12,8 @@ import { UserStreamResponse } from './proto/indexPackage/UserStreamResponse'
 import { emitMainRoomChatUpdate, emmitUserUpdate, listenMainCahtRoomUpdate, listenUserUpdate } from './pubsub'
 
 
-const PORT = 8082
-const PROTO_FILE = './proto/index.proto'
+const PORT = Number(process.env.PORT) || 8082
+const PROTO_FILE = path.join(__dirname, '../proto/index.proto')
 
 const packageDefinition = protoLoader.loadSync(path.resolve(__dirname, PROTO_FILE))
 const gRPCObj = (grpc.loadPackageDefinition(packageDefinition) as unknown) as ProtoGrpcType

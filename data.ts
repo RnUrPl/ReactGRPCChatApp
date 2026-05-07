@@ -3,7 +3,13 @@ import NRP from "node-redis-pubsub"
 import { User } from './proto/indexPackage/User'
 import { StreamMessage } from "./proto/indexPackage/StreamMessage"
 
-const client = redis.createClient()
+
+const redisUrl = process.env.REDIS_URL
+
+const client = redis.createClient({
+  url: redisUrl
+})
+
 
 client.on('error', console.error)
 client.on('connect', console.error)
@@ -73,6 +79,9 @@ export const listMessagesInRoom = (fn: ErrCB<Array<StreamMessage>>) => {
 }
 
 export const nrp = NRP({
-    emmiter: redis.createClient(),
-    receiver: redis.createClient()
+    emmitter: redis.createClient({ url: redisUrl })
+,
+    receiver: redis.createClient({ url: redisUrl })
+
 })
+
