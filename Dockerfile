@@ -7,7 +7,7 @@ COPY . .
 RUN apt-get update && apt-get install -y nodejs npm
 
 RUN npm install
-RUN npm run start
+RUN npm run build
 
 RUN chmod +x start.sh
 

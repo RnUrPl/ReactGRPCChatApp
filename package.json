@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "proto:gen": "rm -rf ./proto/indexPackage && ./proto-gen.sh",
-    "start": "ts-node server",
-    "client": "ts-node client",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "proto:gen": "rm -rf ./proto/indexPackage && ./proto-gen.sh",
+  "build": "tsc",
+  "start": "node dist/server.js",
+  "dev": "ts-node server.ts",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
   "author": "",
   "license": "ISC",
   "dependencies": {
